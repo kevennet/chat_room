@@ -158,8 +158,6 @@ module.exports = {
               {
                 loader: require.resolve('babel-loader'),
                 options: {
-                  babelrc: false,
-                  plugins: ['react-hot-loader/babel'],
                 },
               },
               {
