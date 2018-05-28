@@ -1,19 +1,17 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import { hot } from 'react-hot-loader';
-import logo from './logo.svg';
+import { hot } from 'react-hot-loader'
+
+import Icon from "antd-mobile/lib/icon"
+import "antd-mobile/lib/icon/style/css"
+
+const list = ['check', 'check-circle', 'check-circle-o', 'cross', 'cross-circle', 'cross-circle-o', 'left', 'right', 'down', 'up', 'loading', 'search', 'ellipsis', 'ellipsis-circle', 'exclamation-circle', 'info-circle', 'question-circle', 'voice', 'plus', 'minus', 'dislike', 'fail', 'succes']
 
 class App extends React.Component {
   public render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
+      <div>
+        {list.map(item => (<Icon key={item.toString()} type={item} size='xxs' />))}
       </div>
     );
   }
