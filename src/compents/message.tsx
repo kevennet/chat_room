@@ -1,51 +1,50 @@
-import React, {ReactChild, PureComponent} from 'react'
+import React, { MouseEvent, SFC } from 'react'
+import { IMessage } from '../modal/messageModel'
+// import { person } from '../modal/personModel'
+// import { Observable } from 'rxjs'
+import personService from '../services/personService'
 
-
-type InitialProps = {
-  /**
-   * @desc 对话内容
-   */
-  content?: string,
-  /**
-   * @desc 个人头像
-   */
-  logo?: string,
-  /**
-   * @desc 个人简介
-   */
-  summary?: string,
-  /**
-   * @desc 时间戳
-   */
-  time?: Number,
-  /**
-   * @desc 我的还是别人的
-   */
-  type?: 'me' | 'others' | ReactChild,
-}
-const initialProps: InitialProps = {
+const initialProps: IMessage = {
   content: '对话内容',
-  logo: '',
-  summary: '',
+  id: 1,
   time: +new Date,
-  type: 'me'
+  type: 'receive'
 }
 
-/**
- * @class 单个对话框
- */
-class MessageItem extends PureComponent {
-  constructor (props: InitialProps = {}) {
-    const mergedProps: InitialProps = Object.assign(props, initialProps)
-    super(mergedProps)
+const MessageItem:SFC<IMessage> = (props) => {
+  const {content, id, time, type} = {...initialProps, ...props}
+  const clickHandle = (evt: MouseEvent<HTMLElement>) => {
+    personService.add('testtitle')
+    console.log(personService.person$)
   }
-  public render() {
-    return (
-      <div>
-        <span>{this.props.children}</span>
+  return type === 'receive' ?
+  (
+    <div className="MessageItemBlock">
+      <div className="logo cover_img">
+        {/* <img src={logo} alt="logo"/> */}
       </div>
-    )
-  }
+      <div className="main">
+        <div className="id" onClick={clickHandle}>{id}</div>
+        {/* <div className="name">{name}</div> */}
+        {/* <div className="addon">{summary}</div> */}
+        <div className="content">{content}</div>
+        <div className="time">{time}</div>
+      </div>
+    </div>
+  ) :
+  (
+    <div className="MessageItemBlock">
+      <div className="logo cover_img">
+        {/* <img src={logo} alt="logo"/> */}
+      </div>
+      <div className="main">
+        {/* <div className="name">{name}</div> */}
+        {/* <div className="addon">{summary}</div> */}
+        <div className="content">{content}</div>
+        <div className="time">{time}</div>
+      </div>
+    </div>
+  )
 }
 
 export default MessageItem
