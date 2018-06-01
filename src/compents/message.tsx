@@ -12,8 +12,7 @@ const initialProps: IMessage = {
 const MessageItem:SFC<IMessage> = (props) => {
   const {content, id, time, type, children} = {...initialProps, ...props}
   const clickHandle = (evt: MouseEvent<HTMLElement>) => {
-    personService.add('test')
-    console.log('added')
+    personService.add(`test${+new Date()}`)
   }
   return type === 'receive' ?
   (

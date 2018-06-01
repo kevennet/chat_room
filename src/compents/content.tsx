@@ -16,16 +16,26 @@ class ContentContainer extends PureComponent {
   }
   public componentDidMount () {
     this.person$ = personService.person$.subscribe((persons: string[]) => {
-      console.log(persons)
       this.setState({message: persons})
     })
   }
   public componentWillUnmount () {
     this.person$.unsubscribe()
   }
+
   public render() {
+    const clickHandle = () => {
+      if (this.state.message.length === 1) {
+        this.person$ = personService.person$.subscribe((persons: string[]) => {
+          this.setState({message: persons})
+        })
+      } else {
+        this.person$.unsubscribe()
+        this.setState({message: ['1']})
+      }
+    }
     return (
-      <div>{
+      <div><span onClick={clickHandle}>click me</span>{
         this.state.message.map(item => (<Message key={item.toString()}>{_random}</Message>))
       }</div>
     )

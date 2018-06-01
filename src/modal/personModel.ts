@@ -1,4 +1,4 @@
-export interface IPerson {
+export interface Person {
   /**
    * @desc 头像
    */
@@ -10,15 +10,15 @@ export interface IPerson {
   /**
    * @desc id
    */
-  id?: number,
+  id?: number|string,
   /**
    * @desc 姓名
    */
   name?: string,
 }
 
-export default class {
-  constructor(opt: IPerson) {
-    return opt
+export default class{
+  constructor(opt: Person) {
+    return opt as Person
   }
 }

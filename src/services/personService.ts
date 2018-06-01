@@ -1,5 +1,6 @@
 import { Observable, Subject, BehaviorSubject } from 'rxjs'
-import { scan, publishReplay, refCount, map } from 'rxjs/operators'
+import { scan, map } from 'rxjs/operators'
+import Person, { Person as _person } from "../modal/personModel";
 
 const initialPersons = (() => {
   try {
@@ -9,39 +10,68 @@ const initialPersons = (() => {
   }
 })()
 
+/**
+ * @desc 创建人员所需参数
+ */
+type _creatFrom = number
+
 interface PersonService {
-  add$: Subject<any>
-  creat$: Subject<string>
-  update$: BehaviorSubject<(person: string[]) => {}>
+  /**
+   * @desc 具体操作rxjs的方法
+   */
+  creat$: Subject<_person>
+  update$: BehaviorSubject<(person: _person[]) => {}>
+
+  /**
+   * @desc 作为动作通知队列，通知具体操作
+   */
+  creatPerson$: Subject<_creatFrom>
+
+  /**
+   * @desc 人员仓库，来源于rxjs操作后的结果统计
+   */
   person$: Observable<{}>
 }
 
 class PersonService {
   constructor() {
     this.creat$ = new Subject()
-    this.update$ = new BehaviorSubject((persons:string[]) => persons)
+    this.update$ = new BehaviorSubject((persons:_person[]) => persons)
 
-    this.add$ = new Subject()
+    this.creatPerson$ = new Subject()
 
     this.person$ = this.update$
-      .pipe(scan((persons: string[], operation:(persons: string[])=>{}) => operation(persons), initialPersons))
-      .pipe(publishReplay(1))
-      .pipe(refCount())
+      .pipe(scan((persons: _person[], operation:(persons: _person[])=>{}) => operation(persons), initialPersons))
+
     this.creat$
-      .pipe(map((person:string) => {
-        console.log(person)
-        return (persons:string[]) => {
-          console.log(persons)
-          return persons.concat(person)
-        }
-      }))
+      .pipe(map((person: _person) => (persons:_person[]) => persons.concat(person)))
       .subscribe(this.update$);
 
-    this.add$.subscribe(this.creat$)
+    this.creatPerson$
+      .subscribe(this.creat$)
   }
 
-  public add(title: string) {
-    this.add$.next(title)
+  /**
+   * 对外方法 - 新增人员
+   * @param id 新增人员id
+   */
+  public add(id: string|number) {
+    this.creatPerson$
+        .next(new Person({id}))
+  }
+  /**
+   * 对外方法 - 选中人员
+   * @param id 新增人员id
+   */
+  public choose(id: string|number) {
+    this.creatPerson$.next(id)
+  }
+  /**
+   * 对外方法 - 移除人员
+   * @param id 新增人员id
+   */
+  public remove(id: string) {
+    this.creatPerson$.next(id)
   }
 }
 
