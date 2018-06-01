@@ -1,8 +1,6 @@
 import React, { MouseEvent, SFC } from 'react'
 import { IMessage } from '../modal/messageModel'
-// import { person } from '../modal/personModel'
-// import { Observable } from 'rxjs'
-import personService from '../services/personService'
+import personService, { random as _random } from '../services/personService'
 
 const initialProps: IMessage = {
   content: '对话内容',
@@ -12,10 +10,10 @@ const initialProps: IMessage = {
 }
 
 const MessageItem:SFC<IMessage> = (props) => {
-  const {content, id, time, type} = {...initialProps, ...props}
+  const {content, id, time, type, children} = {...initialProps, ...props}
   const clickHandle = (evt: MouseEvent<HTMLElement>) => {
-    personService.add('testtitle')
-    console.log(personService.person$)
+    personService.add('test')
+    console.log('added')
   }
   return type === 'receive' ?
   (
@@ -24,10 +22,10 @@ const MessageItem:SFC<IMessage> = (props) => {
         {/* <img src={logo} alt="logo"/> */}
       </div>
       <div className="main">
-        <div className="id" onClick={clickHandle}>{id}</div>
+        <div className="id" onClick={clickHandle}>{id}{_random}</div>
         {/* <div className="name">{name}</div> */}
         {/* <div className="addon">{summary}</div> */}
-        <div className="content">{content}</div>
+        <div className="content">{content}{`${children === _random}`}</div>
         <div className="time">{time}</div>
       </div>
     </div>

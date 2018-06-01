@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Subscription } from 'rxjs'
-import personService from '../services/personService'
+import personService, { random as _random } from '../services/personService'
 import Message from './message'
 
 interface ContentContainer {
@@ -9,13 +9,16 @@ interface ContentContainer {
 
 class ContentContainer extends PureComponent {
   public readonly state = {
-    message: [1,2,3]
+    message: ['1']
   }
   constructor (props: string) {
     super(props)
   }
   public componentDidMount () {
-    this.person$ = personService.creat$.subscribe(persons => this.setState({persons}))
+    this.person$ = personService.person$.subscribe((persons: string[]) => {
+      console.log(persons)
+      this.setState({message: persons})
+    })
   }
   public componentWillUnmount () {
     this.person$.unsubscribe()
@@ -23,7 +26,7 @@ class ContentContainer extends PureComponent {
   public render() {
     return (
       <div>{
-        this.state.message.map(item => (<Message key={item.toString()}>{item}</Message>))
+        this.state.message.map(item => (<Message key={item.toString()}>{_random}</Message>))
       }</div>
     )
   }
