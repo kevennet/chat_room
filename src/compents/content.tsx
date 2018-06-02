@@ -9,13 +9,16 @@ interface ContentContainer {
 
 class ContentContainer extends PureComponent {
   public readonly state = {
-    message: ['1']
+    message: [{
+      id: 1
+    }]
   }
   constructor (props: string) {
     super(props)
   }
   public componentDidMount () {
     this.person$ = personService.person$.subscribe((persons: string[]) => {
+      console.log(persons)
       this.setState({message: persons})
     })
   }
@@ -31,12 +34,14 @@ class ContentContainer extends PureComponent {
         })
       } else {
         this.person$.unsubscribe()
-        this.setState({message: ['1']})
+        this.setState({message: [{
+          id: 1
+        }]})
       }
     }
     return (
       <div><span onClick={clickHandle}>click me</span>{
-        this.state.message.map(item => (<Message key={item.toString()}>{_random}</Message>))
+        this.state.message.map(item => (<Message key={item.id}>{_random}</Message>))
       }</div>
     )
   }

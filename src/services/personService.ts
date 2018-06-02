@@ -4,9 +4,19 @@ import Person, { Person as _person } from "../modal/personModel";
 
 const initialPersons = (() => {
   try {
-    return JSON.parse(localStorage.getItem('react-rxjs-todos') as string) as string[] || ['1', '2', `${+new Date()}`, `${Math.random()}`]
+    return JSON.parse(localStorage.getItem('react-rxjs-todos') as string) as string[] || [
+      {id: 1},
+      {id: 2},
+      {id: +new Date()},
+      {id: Math.random()}
+    ]
   } catch {
-    return ['1', '2', `${+new Date()}`, `${Math.random()}`]
+    return [
+      {id: 1},
+      {id: 2},
+      {id: +new Date()},
+      {id: Math.random()}
+    ]
   }
 })()
 
@@ -44,7 +54,10 @@ class PersonService {
       .pipe(scan((persons: _person[], operation:(persons: _person[])=>{}) => operation(persons), initialPersons))
 
     this.creat$
-      .pipe(map((person: _person) => (persons:_person[]) => persons.concat(person)))
+      .pipe(map((person: _person) => (persons:_person[]) => {
+        console.log(person, persons)
+        return persons.concat(person)
+      }))
       .subscribe(this.update$);
 
     this.creatPerson$

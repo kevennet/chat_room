@@ -10,7 +10,7 @@ export interface Person {
   /**
    * @desc id
    */
-  id?: number,
+  id: number,
   /**
    * @desc 姓名
    */
