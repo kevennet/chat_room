@@ -9,9 +9,13 @@ interface ContentContainer {
 
 class ContentContainer extends PureComponent {
   public readonly state = {
+    _message: [{
+      id: 1
+    }],
     message: [{
       id: 1
-    }]
+    }],
+
   }
   constructor (props: string) {
     super(props)
@@ -34,9 +38,7 @@ class ContentContainer extends PureComponent {
         })
       } else {
         this.person$.unsubscribe()
-        this.setState({message: [{
-          id: 1
-        }]})
+        this.setState({message: this.state._message})
       }
     }
     return (

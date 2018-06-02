@@ -2,21 +2,17 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs'
 import { scan, map } from 'rxjs/operators'
 import Person, { Person as _person } from "../modal/personModel";
 
+const debugPersons = [
+  {id: 1},
+  {id: 2},
+  {id: +new Date()},
+  {id: Math.random()}
+]
 const initialPersons = (() => {
   try {
-    return JSON.parse(localStorage.getItem('react-rxjs-todos') as string) as string[] || [
-      {id: 1},
-      {id: 2},
-      {id: +new Date()},
-      {id: Math.random()}
-    ]
+    return JSON.parse(localStorage.getItem('react-rxjs-todos') as string) as string[] || debugPersons
   } catch {
-    return [
-      {id: 1},
-      {id: 2},
-      {id: +new Date()},
-      {id: Math.random()}
-    ]
+    return debugPersons
   }
 })()
 
