@@ -25,7 +25,7 @@ interface PersonService {
   /**
    * @desc 作为动作通知队列，通知具体操作
    */
-  creatPerson$: Subject<_creatFrom>
+  creatPerson$: Subject<_person>
 
   /**
    * @desc 人员仓库，来源于rxjs操作后的结果统计
@@ -55,7 +55,7 @@ class PersonService {
    * 对外方法 - 新增人员
    * @param id 新增人员id
    */
-  public add(id: string|number) {
+  public add(id: _creatFrom) {
     this.creatPerson$
         .next(new Person({id}))
   }
@@ -64,14 +64,14 @@ class PersonService {
    * @param id 新增人员id
    */
   public choose(id: string|number) {
-    this.creatPerson$.next(id)
+    // this.creatPerson$.next(id)
   }
   /**
    * 对外方法 - 移除人员
    * @param id 新增人员id
    */
   public remove(id: string) {
-    this.creatPerson$.next(id)
+    // this.creatPerson$.next(id)
   }
 }
 

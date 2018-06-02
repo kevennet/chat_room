@@ -10,15 +10,17 @@ export interface Person {
   /**
    * @desc id
    */
-  id?: number|string,
+  id?: number,
   /**
    * @desc 姓名
    */
   name?: string,
 }
 
-export default class{
+export class Person {
   constructor(opt: Person) {
     return opt as Person
   }
 }
+
+export default Person
