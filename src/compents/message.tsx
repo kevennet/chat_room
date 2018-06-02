@@ -1,18 +1,18 @@
 import React, { MouseEvent, SFC } from 'react'
-import { IMessage } from '../modal/messageModel'
-import personService, { random as _random } from '../services/personService'
+import { Message } from '../modal/messageModel'
+import MessageService, { random as _random } from '../services/messageService'
 
-const initialProps: IMessage = {
+const initialProps: Message = {
   content: '对话内容',
   id: 1,
   time: +new Date,
   type: 'receive'
 }
 
-const MessageItem:SFC<IMessage> = (props) => {
+const MessageItem:SFC<Message> = (props) => {
   const {content, id, time, type, children} = {...initialProps, ...props}
   const clickHandle = (evt: MouseEvent<HTMLElement>) => {
-    personService.add(+new Date())
+    MessageService.add(+new Date())
   }
   return type === 'receive' ?
   (

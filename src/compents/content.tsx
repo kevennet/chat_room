@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Subscription } from 'rxjs'
-import personService, { random as _random } from '../services/personService'
+import MessageService, { random as _random } from '../services/messageService'
 import Message from './message'
 
 interface ContentContainer {
@@ -21,9 +21,9 @@ class ContentContainer extends PureComponent {
     super(props)
   }
   public componentDidMount () {
-    this.person$ = personService.person$.subscribe((persons: string[]) => {
-      console.log(persons)
-      this.setState({message: persons})
+    this.person$ = MessageService.message$.subscribe((messages: string[]) => {
+      console.log(messages)
+      this.setState({message: messages})
     })
   }
   public componentWillUnmount () {
@@ -33,8 +33,8 @@ class ContentContainer extends PureComponent {
   public render() {
     const clickHandle = () => {
       if (this.state.message.length === 1) {
-        this.person$ = personService.person$.subscribe((persons: string[]) => {
-          this.setState({message: persons})
+        this.person$ = MessageService.message$.subscribe((message: string[]) => {
+          this.setState({message})
         })
       } else {
         this.person$.unsubscribe()

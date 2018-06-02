@@ -1,5 +1,5 @@
 
-export interface IMessage {
+export interface Message {
   /**
    * @desc 消息id
    */
@@ -33,9 +33,9 @@ export interface IMessage {
    */
   quote?: string,
 }
-
-export default class {
-  constructor(opt: IMessage) {
+export class Message {
+  constructor(opt: Message) {
     return opt
   }
 }
+export default Message
