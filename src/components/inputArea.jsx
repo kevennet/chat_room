@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 
+import Icon from 'antd-mobile/lib/icon'
 import List from 'antd-mobile/lib/list'
-import InputItem from 'antd-mobile/lib/input-item'
+import TextareaItem from 'antd-mobile/lib/textarea-item'
+import 'antd-mobile/lib/icon/style/css'
 import 'antd-mobile/lib/list/style/css'
-import 'antd-mobile/lib/input-item/style/css'
+import 'antd-mobile/lib/textarea-item/style/css'
 import　'./inputArea.css'
 
 class App extends Component {
@@ -19,24 +21,45 @@ class App extends Component {
     const scale = window.innerWidth / window.screen.width
     this.setState({scale})
   }
-  focusHandle = (evt) => {
+
+  focusHandle = () => {
     this.setState({inputMargin: this.state._inputMargin})
   }
-  blurHandle = (evt) => {
+  blurHandle = () => {
     this.setState({inputMargin: 0})
+  }
+  submitHandle = () => {
+    alert('submit')
+  }
+  addFileHandle = () => {
+    alert('addFileHandle')
   }
   render() {
     return (
         <List>
-          <InputItem
-            placeholder="请输入聊天内容"
-            onFocus={this.focusHandle}
-            onBlur={this.blurHandle}
-            className={`bottomInput`}
-            style={{
-              bottom: `${this.state.inputMargin}px`,
-            }}
-          />
+          <List.Item
+            thumb={<Icon
+              type="ellipsis"
+              onClick={(evt) => {
+                evt.stopPropagation()
+                this.addFileHandle()
+              }}
+            />}
+            arrow="horizontal"
+            multipleLine
+            activeStyle={null}
+            align="middle"
+            onClick={this.submitHandle}
+          >
+            <TextareaItem
+              rows={3}
+              placeholder="请输入聊天内容"
+              onClick={(evt) => {
+                evt.stopPropagation()
+              }}
+              clear
+            />
+          </List.Item>
         </List>
     );
   }

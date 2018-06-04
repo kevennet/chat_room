@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
     <meta name="theme-color" content="#000000">
     <!--
       manifest.json provides metadata used when your web app is added to the
@@ -19,11 +18,22 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>聊天室</title>
+    <script src="https://cdn.jsdelivr.net/npm/fastclick/lib/fastclick.min.js"></script>
+    <script>
+      if ('addEventListener' in document) {
+        document.addEventListener('DOMContentLoaded', function() {
+          FastClick.attach(document.body);
+        }, false);
+      }
+      if(!window.Promise) {
+        document.writeln('<script src="https://cdn.jsdelivr.net/npm/core-js/client/core.min.js"'+'>'+'<'+'/'+'script>');
+      }
+    </script>
   </head>
   <body>
     <noscript>
-      You need to enable JavaScript to run this app.
+      页面需要JS运行权限
     </noscript>
     <div id="root"></div>
     <!--
