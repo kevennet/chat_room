@@ -177,6 +177,7 @@ module.exports = {
                     autoprefixer({
                       browsers: env.browserList,
                     }),
+                    require('postcss-nested')
                   ],
                 },
               },

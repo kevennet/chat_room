@@ -88,15 +88,35 @@
   "babel": {
     "presets": [
       "react-app",
-      ["env", {
-      "targets": {
-        "browsers": [">0.25%", "not ie < 11", "not op_mini all", "iOS >= 7"]
-      }
-    }]
+      [
+        "env",
+        {
+          "targets": {
+            "browsers": [
+              ">0.25%",
+              "not ie < 11",
+              "not op_mini all",
+              "iOS >= 7"
+            ]
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      ["transform-class-properties", { "spec": true }]
     ]
   },
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": [">0.25%", "not ie < 11", "not op_mini all", "iOS >= 7"]
+  "browserslist": [
+    ">0.25%",
+    "not ie < 11",
+    "not op_mini all",
+    "iOS >= 7"
+  ],
+  "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "postcss-nested": "^3.0.0"
+  }
 }

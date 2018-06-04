@@ -1,0 +1,9 @@
+.am-list-item.bottomInput .am-input-control input {
+  width: 100%;
+  position: fixed;
+  padding-left: 15px;
+  min-height: 44px;
+  background-color: white;
+  z-index: 2;
+  left: 0;
+}
