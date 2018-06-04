@@ -3,10 +3,10 @@
  * @desc 产生随机值
  */
 class Random {
-  private ENG = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H','I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y','Z']
-  private eng = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h','i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y','z']
-  private num = ['1','2','3','4','5','6','7','8','9','0']
-  private getTypedArray (pow: number) {
+  public ENG = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H','I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y','Z']
+  public eng = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h','i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y','z']
+  public num = ['1','2','3','4','5','6','7','8','9','0']
+  public getTypedArray (pow: number) {
     if (pow <= 8) {
       return new Uint8Array(10)
     }
@@ -17,7 +17,7 @@ class Random {
       return new Uint32Array(10)
     }
   }
-  private getSeed (pow: 8|16|32) {
+  public getSeed (pow: 8|16|32) {
     if (crypto && crypto.getRandomValues && Float64Array) {
       // 密码学随机数可用
       const typedArray = this.getTypedArray(pow)

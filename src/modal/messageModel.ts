@@ -44,7 +44,7 @@ export interface Message {
 }
 export class Message {
   constructor(opt: object) {
-    return opt as Message
+    return {...defaultValue, ...opt} as Message
   }
 }
 export default Message

@@ -43,7 +43,7 @@ class ContentContainer extends PureComponent {
     }
     return (
       <div><span onClick={clickHandle}>click me</span>{
-        this.state.message.map(item => (<Message key={item.id}>{_random}</Message>))
+        this.state.message.map(item => (<Message key={item.id} {...item}>{_random}</Message>))
       }</div>
     )
   }
