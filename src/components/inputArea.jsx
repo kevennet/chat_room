@@ -47,7 +47,7 @@ class App extends Component {
             />}
             arrow="horizontal"
             multipleLine
-            activeStyle={null}
+            activeStyle={false}
             align="middle"
             onClick={this.submitHandle}
           >

@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import Header from "./components/header";
 import Container from "./components/main";
 import InputArea from "./components/inputArea";
 import './App.css';
 
-class App extends Component {
+class App extends PureComponent {
   render() {
     return (
       <Fragment>
