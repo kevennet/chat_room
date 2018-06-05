@@ -1,7 +1,7 @@
 .message_item {
   margin-top: 10px;
 }
-.message_item.recive {
+.message_item.send {
   flex-direction: row-reverse;
 }
 .message_item .logo{

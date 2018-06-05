@@ -5,17 +5,29 @@ import 'antd-mobile/lib/flex/style/css'
 import './messageItem.css'
 
 class App extends PureComponent {
-  constructor () {
+  constructor (props) {
     super()
     this._type = Math.random()
     this.state = {
-      from: this.props && this.props.from ? this.props.from : 'inoriF',
-      to: this.props && this.props.to ? this.props.to : 'inoriT',
-      content: this.props && this.props.content ? this.props.content : 'content',
+      from: props && props.from ? props.from : 'inoriF',
+      to: props && props.to ? props.to : 'inoriT',
+      content: props && props.content ? props.content : 'content',
       _type: this._type,
-      type: this.props && this.props.type ? this.props.type : this._type > .5 ? 'recive' : 'send',
-      timesmap: this.props && this.props.timesmap ? this.props.timesmap : new Date().toLocaleString()
+      type: props && props.type ? props.type : this._type > .5 ? 'recive' : 'send',
+      timesmap: props && props.timesmap ? props.timesmap : new Date().toLocaleString()
     }
+    this.mainRef = React.createRef()
+  }
+
+  componentDidMount = () => {
+    console.log(
+      this.mainRef.current.scrollIntoView ?
+      this.mainRef.current.scrollIntoView() :
+        this.mainRef.current.scrollIntoViewIfNeed ?
+        this.mainRef.current.scrollIntoViewIfNeeded () :
+        ''
+    )
+    // this.mainRef.scrollIntoView()
   }
   render () {
     return (
@@ -27,7 +39,7 @@ class App extends PureComponent {
           <div className="main_content">
             <div className="header">{this.state.from}</div>
             <div className="content">{/<img .+\/>/.test(this.state.content) ? 'img' : unescape(this.state.content)}</div>
-            <div className="timesmap">{this.state.timesmap}</div>
+            <div className="timesmap" ref={this.mainRef}>{this.state.timesmap}</div>
           </div>
         </Flex.Item>
       </Flex>

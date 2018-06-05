@@ -1,38 +1,36 @@
 import React, { PureComponent, Fragment } from 'react'
 
-import Message from "./messageItem";
 import WingBlank from 'antd-mobile/lib/wing-blank'
 import 'antd-mobile/lib/wing-blank/style/css'
 
+import Message from "./messageItem"
 
 class App extends PureComponent {
-  constructor () {
+  constructor (props) {
     super()
     this.state = {
-      messgeList: [
-        {
-          id: 1,
-          from: '001',
-          to: '002',
-          content: '010101',
-          timesmap: +new Date()
-        },
-        {
-          id: 2,
-          from: '001',
-          to: '002',
-          content: '010101',
-          timesmap: +new Date()
-        }
-      ]
+      messgeList: props.messgeList
     }
   }
+
+  static getDerivedStateFromProps = (nextProps, prevState) => {
+    console.log(nextProps)
+    return {
+      messgeList: nextProps.messgeList
+    }
+  }
+  // componentDidUpdate() {
+  //   console.log(React.findDOMNode(this.mainRef))
+  //   // this.mainRef.scrollIntoView()
+  // }
+
+
   render() {
     return (
       <Fragment>
-        <WingBlank style={{height: 'calc(100% - 45px - 199px)'}}>
+        <WingBlank style={{height: 'calc(100% - 45px - 199px)', overflowY: 'auto'}} >
           {
-            this.state.messgeList.map(item =>{
+            (this.props.wsReady === undefined || this.props.wsReady) && this.state.messgeList.map(item =>{
               return (
                 <Message key={item.id} {...item} />
               )
