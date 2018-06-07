@@ -93,7 +93,6 @@ class App extends Component {
       } else if (data === 'say') {
         // {"type":"say","from_client_id":"7f00000108fd00000018","from_client_name":"manage_a","to_client_id":"7f00000108ff00000021","content":"<b>\u4f60\u5bf9inori2452290105743684\u8bf4: <\/b>\u8bf7\u5728\u8fd9\u91cc\u8f93\u5165\u6d88\u606f","time":"2018-06-05 16:12:23"}
         const data = JSON.parse(res.data)
-        console.log(data)
         this.setState((prevState, props) => {
           return {
             messgeList: [...prevState.messgeList, {
@@ -106,7 +105,6 @@ class App extends Component {
             }]
           }
         })
-        console.log(res.data)
       } else if (data === 'logout') {
         // {"type":"logout","from_client_id":"7f00000108ff00000006","from_client_name":"xiao_ming","time":"2018-06-05 14:34:57"}
         const data = JSON.parse(res.data)
@@ -122,19 +120,15 @@ class App extends Component {
         })
       } else {
         //
-        console.log(res.data)
       }
     } catch (err) {
-      console.log(err)
     }
   }
   closeHandle (res) {
     Toast.fail('聊天室已关闭，请刷新页面尝试重连', 0, () => {}, true)
-    console.log(res)
   }
   errorHandle (res) {
     Toast.fail('聊天室意外关闭，请刷新页面尝试重连', 0, () => {}, true)
-    console.log(res)
   }
   render() {
     return (

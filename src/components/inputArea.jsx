@@ -23,7 +23,7 @@ class App extends Component {
     this.setState({scale})
   }
   changehandle = (val) => {
-    console.log(val)
+
     this.setState({currentMessge: val})
   }
   focusHandle = () => {

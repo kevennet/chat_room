@@ -20,14 +20,14 @@ class App extends PureComponent {
   }
 
   componentDidMount = () => {
-    console.log(
-      this.mainRef.current.scrollIntoView ?
+    const mes = this.mainRef.current.scrollIntoView ?
       this.mainRef.current.scrollIntoView() :
         this.mainRef.current.scrollIntoViewIfNeed ?
         this.mainRef.current.scrollIntoViewIfNeeded () :
-        ''
-    )
-    // this.mainRef.scrollIntoView()
+        'miss scrollIntoView'
+    if (typeof mes === 'string') {
+      // 缺乏元素滚动API
+    }
   }
   render () {
     return (

@@ -1,6 +1,6 @@
 
 
-const wsURL = 'ws://192.168.1.161:7272'
+const wsURL = 'ws://www.pingguling.com:6379'
 
 const loginData = {
   type: 'login',

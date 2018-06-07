@@ -14,16 +14,10 @@ class App extends PureComponent {
   }
 
   static getDerivedStateFromProps = (nextProps, prevState) => {
-    console.log(nextProps)
     return {
       messgeList: nextProps.messgeList
     }
   }
-  // componentDidUpdate() {
-  //   console.log(React.findDOMNode(this.mainRef))
-  //   // this.mainRef.scrollIntoView()
-  // }
-
 
   render() {
     return (
