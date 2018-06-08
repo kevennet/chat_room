@@ -80,7 +80,6 @@ class App extends Component {
                   timesmap: +new Date(),
                   type: item.client_name === data.client_name ? 'send' : 'recive'
                 })
-                console.log(item.client_id, data.client_id)
               } catch (e) {
                 console.log(e)
               }
