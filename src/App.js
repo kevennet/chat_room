@@ -133,7 +133,7 @@ class App extends Component {
         const data = JSON.parse(res.data)
         this.setState((prevState, props) => {
           const index = prevState.client_list.findIndex(item => item.id === data.from_client_id)
-          if (index && prevState.client_list[index]) {
+          if (index > -1 && prevState.client_list[index]) {
             return {
               client_list: [...prevState.client_list.slice(0, index),...prevState.client_list.slice(index + 1, )]
             }
