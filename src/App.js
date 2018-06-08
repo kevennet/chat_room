@@ -21,14 +21,14 @@ class App extends Component {
           from: '001',
           to: '002',
           content: '百分百爱你',
-          timesmap: +new Date()
+          timesmap: new Date().toLocaleString()
         },
         {
           id: 2,
           from: '001',
           to: '002',
           content: '百分百爱你11212',
-          timesmap: +new Date()
+          timesmap: new Date().toLocaleString()
         }
       ]
     }
@@ -77,7 +77,7 @@ class App extends Component {
                   from: item.client_name,
                   to: item.to_client_name,
                   content: item.onmessage.content,
-                  timesmap: +new Date(),
+                  timesmap: new Date().toLocaleString(),
                   type: item.client_name === data.client_name ? 'send' : 'recive'
                 })
               } catch (e) {
