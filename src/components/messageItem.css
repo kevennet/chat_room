@@ -1,5 +1,6 @@
 .message_item {
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 .message_item.send {
   flex-direction: row-reverse;

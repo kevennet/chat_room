@@ -21,9 +21,9 @@ class App extends PureComponent {
 
   componentDidMount = () => {
     const mes = this.mainRef.current.scrollIntoView ?
-      this.mainRef.current.scrollIntoView() :
+      this.mainRef.current.scrollIntoView({behavior: 'smooth', block: 'start'}) :
         this.mainRef.current.scrollIntoViewIfNeed ?
-        this.mainRef.current.scrollIntoViewIfNeeded () :
+        this.mainRef.current.scrollIntoViewIfNeeded (true) :
         'miss scrollIntoView'
     if (typeof mes === 'string') {
       // 缺乏元素滚动API
