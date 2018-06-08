@@ -7,3 +7,6 @@
   z-index: 2;
   left: 0;
 }
+.patch-less-extra.am-list-item .am-list-line .am-list-extra {
+  flex-basis: 2em;
+}

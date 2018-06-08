@@ -13,6 +13,12 @@ import 'antd-mobile/lib/toast/style/css'
 
 import　'./inputArea.css'
 
+const PickerWrapedIcon = props => (
+  <Icon
+    type="ellipsis"
+    onClick={props.onClick}
+  />
+)
 class App extends Component {
   constructor (props) {
     super()
@@ -20,29 +26,24 @@ class App extends Component {
       scale: 0,
       inputMargin: 0,
       _inputMargin: 44,
-      currentMessge: '请在这里输入消息'
+      currentMessge: '请在这里输入消息',
+      currentPerson: null,
+      district: []
     }
-    this.district = [
-      {
-        value: '1232',
-        label: '客服1'
-      },
-      {
-        value: '1233',
-        label: '客服2'
-      },
-      {
-        value: '1234',
-        label: '客服3'
-      }
-    ]
+  }
+  static getDerivedStateFromProps (props, state) {
+    return {
+      district: (props.clientList && props.clientList.map(item => ({
+        value: item.id,
+        label: item.name,
+      }))) || []
+    }
   }
   componentDidMount () {
     const scale = window.innerWidth / window.screen.width
     this.setState({scale})
   }
   changehandle = val => {
-
     this.setState({currentMessge: val})
   }
   focusHandle = () => {
@@ -57,6 +58,10 @@ class App extends Component {
       Toast.info('客服正在换衣服。。请稍候', 2);
       return
     }
+    if (!!!this.state.currentPerson) {
+      Toast.info('请先选择心仪的客服姐姐', 2);
+      return
+    }
     const data = {
       type: 'say',
       to_client_id: this.props.clientList[this.props.clientList.length - 1].id,
@@ -68,25 +73,28 @@ class App extends Component {
       currentMessge: ''
     })
   }
-  PickerWrapedIcon = props => (
-    <Icon
-      type="ellipsis"
-      onClick={props.onClick}
-    />
-  )
+  changeSelectHandle = val => {
+    this.setState({
+      currentPerson: val
+    })
+  }
+
   render() {
     return (
       <List>
         <List.Item
           thumb={
-            <Picker data={this.district} cols={1}>
-              <this.PickerWrapedIcon />
+            <Picker data={this.state.district} cols={1} onChange={this.changeSelectHandle}>
+              <PickerWrapedIcon />
             </Picker>
           }
+          // extra={`发送`}
+          // 修改字眼长度时需要配合修改 css: 11
           extra={<span onClick={this.submitHandle}>发送</span>}
           multipleLine
           activeStyle={false}
           align="middle"
+          className={`patch-less-extra`}
         >
           <TextareaItem
             rows={3}
