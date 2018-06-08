@@ -22,7 +22,7 @@ class App extends PureComponent {
   render() {
     return (
       <Fragment>
-        <WingBlank style={{height: 'calc(100% - 45px - 199px)', overflowY: 'auto'}} >
+        <WingBlank style={{height: 'calc(100% - 45px - 119px)', overflowY: 'auto'}} >
           {
             (this.props.wsReady === undefined || this.props.wsReady) && this.state.messgeList.map(item =>{
               return (
