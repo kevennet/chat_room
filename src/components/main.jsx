@@ -6,16 +6,15 @@ import 'antd-mobile/lib/wing-blank/style/css'
 import Message from "./messageItem"
 
 class App extends PureComponent {
+  static getDerivedStateFromProps = (nextProps, prevState) => {
+    return {
+      messgeList: nextProps.messgeList
+    }
+  }
   constructor (props) {
     super()
     this.state = {
       messgeList: props.messgeList
-    }
-  }
-
-  static getDerivedStateFromProps = (nextProps, prevState) => {
-    return {
-      messgeList: nextProps.messgeList
     }
   }
 

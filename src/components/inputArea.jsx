@@ -20,6 +20,14 @@ const PickerWrapedIcon = props => (
   />
 )
 class App extends Component {
+  static getDerivedStateFromProps (props, state) {
+    return {
+      district: (props.clientList && props.clientList.map(item => ({
+        value: item.id,
+        label: item.name,
+      }))) || []
+    }
+  }
   constructor (props) {
     super()
     this.state = {
@@ -31,14 +39,7 @@ class App extends Component {
       district: []
     }
   }
-  static getDerivedStateFromProps (props, state) {
-    return {
-      district: (props.clientList && props.clientList.map(item => ({
-        value: item.id,
-        label: item.name,
-      }))) || []
-    }
-  }
+
   componentDidMount () {
     const scale = window.innerWidth / window.screen.width
     this.setState({scale})
