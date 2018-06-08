@@ -53,6 +53,11 @@ class App extends Component {
   blurHandle = () => {
     this.setState({inputMargin: 0})
   }
+  submitKeyHandle = evt =>{
+    if (`${evt.charCode}` === '13' && evt.ctrlKey) {
+      this.submitHandle()
+    }
+  }
   submitHandle = () => {
     //  {"type":"say","to_client_id":"'+to_client_id+'","to_client_name":"'+to_client_name+'","content":"'+input.value.replace(/"./g, '\\"').replace(/\n/g,'\\n').replace(/\r/g, '\\r')+'"}
     if (!!!this.props.clientList || this.props.clientList.length < 1) {
@@ -105,6 +110,7 @@ class App extends Component {
             onClick={(evt) => {
               evt.stopPropagation()
             }}
+            onKeyPress={evt => this.submitKeyHandle(evt)}
             value={this.state.currentMessge}
             clear
           />
