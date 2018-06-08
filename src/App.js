@@ -65,6 +65,30 @@ class App extends Component {
         // {"type":"login","client_id":"7f00000108fe00000010","client_name":"inori5384097704063824","time":"2018-06-05 14:09:57","client_list":{"7f00000108ff0000000d":"xiao_ming"}}
         const data = JSON.parse(res.data)
         if (data.client_list) {
+          if (data.my_message_data) {
+            const mes_arr = data.my_message_data
+            let temp_arr = []
+            for (let item of mes_arr) {
+              try {
+                const onmessage = JSON.parse(item.onmessage)
+                item.onmessage = onmessage
+                temp_arr.push({
+                  id: item.id,
+                  from: item.client_name,
+                  to: item.to_client_name,
+                  content: item.onmessage.content,
+                  timesmap: +new Date(),
+                  type: item.client_name === data.client_name ? 'send' : 'recive'
+                })
+                console.log(item.client_id, data.client_id)
+              } catch (e) {
+                console.log(e)
+              }
+            }
+            this.setState({
+              messgeList: temp_arr
+            })
+          }
           let client_list = []
           for(let item of Object.keys(data.client_list)) {
             if (data.client_id !== item) {
